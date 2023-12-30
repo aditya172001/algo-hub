@@ -1,0 +1,9 @@
+{
+  "name": "store",
+  "version": "0.0.0",
+  "main": "./src/index",
+  "types": "./src/index",
+  "dependencies": {
+    "types": "*"
+  }
+}

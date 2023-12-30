@@ -1,0 +1,17 @@
+{
+  "extends": "tsconfig/nextjs.json",
+  "compilerOptions": {
+    "plugins": [{ "name": "next" }]
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "tailwind.config.js",
+    "src/app/_trpc/trpc-provider.tsx",
+    "../server/src/utils/client.ts",
+    "../server/src/utils/server-client.ts"
+  ],
+  "exclude": ["node_modules"]
+}

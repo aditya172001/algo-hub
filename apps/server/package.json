@@ -1,0 +1,24 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": ".src/index.ts",
+  "types": ".src/index.ts",
+  "scripts": {
+    "dev": "nodemon --exec ts-node ./src/index.ts",
+    "build": "tsc",
+    "start": "node ./dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "3.0.2",
+    "ts-node": "10.9.1"
+  },
+  "dependencies": {
+    "database": "*",
+    "problems": "*",
+    "types": "*",
+    "utils": "*"
+  }
+}

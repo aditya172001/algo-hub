@@ -1,0 +1,10 @@
+export { ques1 } from "./question_1";
+export { ques2 } from "./question_2";
+export { ques3 } from "./question_3";
+export { ques4 } from "./question_4";
+export { ques5 } from "./question_5";
+export { ques6 } from "./question_6";
+export { ques7 } from "./question_7";
+export { ques8 } from "./question_8";
+export { ques9 } from "./question_9";
+export { ques10 } from "./question_10";
