@@ -70,8 +70,8 @@ export const userRouter = router({
     }
     const filteredQuestions = allQuestions.map((ques) => {
       let status: $Enums.StatusType = "ToDo";
-      if (ques.users.length !== 0 && ques.users[0].status)
-        status = ques.users[0].status;
+      if (ques.users?.length !== 0 && ques.users[0]?.status!)
+        status = ques.users[0].status!;
 
       return {
         quesNumber: ques.quesNumber,

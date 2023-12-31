@@ -15,7 +15,7 @@ export function TrpcProvider({
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: "http://localhost:4000/api/trpc",
+          url: `${process.env.SERVER_BASE_URL}:${process.env.SERVER_PORT}/api/trpc`,
         }),
       ],
     })

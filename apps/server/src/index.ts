@@ -16,6 +16,6 @@ app.use(
 );
 
 //port not defined as of now
-app.listen(process.env.PORT || 4000, () => {
-  console.log("started listening on port 4000");
+app.listen(process.env.SERVER_PORT, () => {
+  console.log(`started listening on port ${process.env.SERVER_PORT}`);
 });
