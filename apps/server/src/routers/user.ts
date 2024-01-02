@@ -44,7 +44,7 @@ export const userRouter = router({
       userSolvedQuestions: data.userSolvedQuestions,
     };
   }),
-  // get brief detail about all questions [later update it to get data from db after question storage overhaul]
+  // get brief detail about all questions
   getAllQuestions: serverProcedure.query(async (opts) => {
     const { session, prisma } = opts.ctx;
     const email = session.user?.email;
@@ -159,7 +159,7 @@ export const userRouter = router({
 
       try {
         const { stdout, stderr } = await asyncExec(dockerCommand, {
-          timeout: 5000,
+          timeout: 10000,
           killSignal: "SIGKILL",
         });
         if (stdout.includes("true")) {
@@ -192,6 +192,7 @@ export const userRouter = router({
           return { status: "error", message: "WA" };
         }
       } catch (error) {
+        console.log("error in trycatch:", error);
         exec(`docker stop ${containerName}`);
         const isSaved = await updateDbOnCodeSubmit({
           userId,

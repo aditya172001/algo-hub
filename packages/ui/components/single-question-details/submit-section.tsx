@@ -9,7 +9,7 @@ import { useSession } from "next-auth/react";
 
 export function SubmitSection(): ReactElement {
   const parms = useParams();
-  const quesNumber = parseInt(parms.problemID as string);
+  const quesNumber = parseInt(parms.quesNumber as string);
   const userCode = useRecoilValue(userCodeState);
 
   const submitResponse = trpc.user.submitSolution.useMutation();
