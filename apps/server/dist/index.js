@@ -30300,8 +30300,7 @@ var require_client = __commonJS({
         "previewFeatures": []
       },
       "relativeEnvPaths": {
-        "rootEnvPath": "../../../.env",
-        "schemaEnvPath": "../../../packages/database/.env"
+        "rootEnvPath": "../../../.env"
       },
       "relativePath": "../../../packages/database/prisma",
       "clientVersion": "5.7.1",
@@ -62195,7 +62194,7 @@ var userRouter = router({
       userSolvedQuestions: data.userSolvedQuestions
     };
   }),
-  // get brief detail about all questions [later update it to get data from db after question storage overhaul]
+  // get brief detail about all questions
   getAllQuestions: serverProcedure.query(async (opts) => {
     const { session, prisma: prisma2 } = opts.ctx;
     const email = session.user?.email;
@@ -62292,7 +62291,7 @@ var userRouter = router({
     const dockerCommand = `docker run --name ${containerName} --rm -e USER_INPUT='${filteredCode}' adityakumar172001/algo-hub-code-execution-engine`;
     try {
       const { stdout, stderr } = await asyncExec(dockerCommand, {
-        timeout: 5e3,
+        timeout: 1e4,
         killSignal: "SIGKILL"
       });
       if (stdout.includes("true")) {
@@ -62323,15 +62322,18 @@ var userRouter = router({
         return { status: "error", message: "WA" };
       }
     } catch (error) {
+      console.log("error in trycatch:", error);
       (0, import_child_process.exec)(`docker stop ${containerName}`);
-      const isSaved = await updateDbOnCodeSubmit({
-        userId,
-        questionId,
-        status: "Attempted",
-        prisma: prisma2
-      });
-      if (!isSaved) {
-        return { status: "error", message: "Internal Server Error" };
+      if (currentQuestionStatus === "ToDo") {
+        const isSaved = await updateDbOnCodeSubmit({
+          userId,
+          questionId,
+          status: "Attempted",
+          prisma: prisma2
+        });
+        if (!isSaved) {
+          return { status: "error", message: "Internal Server Error" };
+        }
       }
       return { status: "error", message: "TLE" };
     }

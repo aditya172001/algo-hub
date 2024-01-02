@@ -15,8 +15,8 @@ export function TrpcProvider({
     trpc.createClient({
       links: [
         httpBatchLink({
-          // url: `http://localhost:4000/api/trpc`, //for dev env
-          url: `https://api-algo-hub.adityastack.dev/api/trpc`,
+          url: `http://localhost:4000/api/trpc`, //for dev env
+          // url: `https://api-algo-hub.adityastack.dev/api/trpc`,
         }),
       ],
     })

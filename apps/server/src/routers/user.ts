@@ -194,14 +194,16 @@ export const userRouter = router({
       } catch (error) {
         console.log("error in trycatch:", error);
         exec(`docker stop ${containerName}`);
-        const isSaved = await updateDbOnCodeSubmit({
-          userId,
-          questionId,
-          status: "Attempted",
-          prisma,
-        });
-        if (!isSaved) {
-          return { status: "error", message: "Internal Server Error" };
+        if (currentQuestionStatus === "ToDo") {
+          const isSaved = await updateDbOnCodeSubmit({
+            userId,
+            questionId,
+            status: "Attempted",
+            prisma,
+          });
+          if (!isSaved) {
+            return { status: "error", message: "Internal Server Error" };
+          }
         }
         return { status: "error", message: "TLE" };
       }
