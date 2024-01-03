@@ -62291,7 +62291,7 @@ var userRouter = router({
     const dockerCommand = `docker run --name ${containerName} --rm -e USER_INPUT='${filteredCode}' adityakumar172001/algo-hub-code-execution-engine`;
     try {
       const { stdout, stderr } = await asyncExec(dockerCommand, {
-        timeout: 1e4,
+        timeout: 6e3,
         killSignal: "SIGKILL"
       });
       if (stdout.includes("true")) {
