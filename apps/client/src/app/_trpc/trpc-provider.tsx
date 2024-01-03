@@ -10,16 +10,13 @@ export function TrpcProvider({
 }: {
   children: React.ReactNode;
 }): React.ReactNode {
-  const executionEngineBeUrl =
-    process.env.DEV_ENV === "production"
-      ? "https://api-algo-hub.adityastack.dev/api/trpc"
-      : "http://localhost:4000/api/trpc";
   const [queryClient] = useState(() => new QueryClient({}));
   const [trpcClient] = useState(() =>
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: executionEngineBeUrl,
+          url: "https://api-algo-hub.adityastack.dev/api/trpc", //for production
+          // url: "http://localhost:4000/api/trpc", for development
         }),
       ],
     })
