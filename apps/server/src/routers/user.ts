@@ -159,7 +159,7 @@ export const userRouter = router({
 
       try {
         const { stdout, stderr } = await asyncExec(dockerCommand, {
-          timeout: 10000,
+          timeout: 6000,
           killSignal: "SIGKILL",
         });
         if (stdout.includes("true")) {

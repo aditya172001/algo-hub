@@ -25,4 +25,4 @@ jobs:
           chmod 600 keyfile
           mkdir -p ~/.ssh
           cp known_hosts ~/.ssh/known_hosts
-          ssh -t -i keyfile ubuntu@ec2-43-204-102-38.ap-south-1.compute.amazonaws.com "sudo bash /home/ubuntu/algo-hub/deploy.sh"
+          ssh -t -i keyfile ubuntu@ec2-13-127-183-45.ap-south-1.compute.amazonaws.com "sudo bash /home/ubuntu/algo-hub/deploy.sh"
