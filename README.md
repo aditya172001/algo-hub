@@ -1,81 +1,33 @@
-# Turborepo starter
+# Algo Hub - LeetCode Clone
 
-This is an official starter Turborepo.
+Algo Hub is a cutting-edge web application designed as a LeetCode clone, providing users with a seamless platform to hone their algorithmic problem-solving skills. It's crafted with a modern tech stack to deliver an efficient and enjoyable experience.
 
-## Using this example
+## Features
 
-Run the following command:
+### User Authentication
 
-```sh
-npx create-turbo@latest
-```
+- Users can securely log in using Google OAuth2 through NextAuth.
 
-## What's inside?
+### Algorithmic Problem-Solving
 
-This Turborepo includes the following packages/apps:
+- Engage in a diverse range of algorithmic problems categorized by difficulty (easy, medium, hard).
 
-### Apps and Packages
+### Code Execution Engine
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
+- A Docker-powered code execution engine deployed on AWS EC2 ensures scalability.
+- PM2 guarantees robust process management, while Nginx acts as a reliable reverse proxy.
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+### Progress Tracking
 
-### Utilities
+- Easily filter questions based on difficulty and track your solved status (todo, attempted, solved).
+- The profile dropdown offers insights into your progress.
 
-This Turborepo has some additional tools already setup for you:
+### Supported Language
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+- TypeScript is the language of choice for problem-solving.
 
-### Build
+## Getting Started
 
-To build all apps and packages, run the following command:
+Coming soon!
 
-```
-cd my-turborepo
-pnpm build
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+Feel free to explore, contribute, and elevate the platform to meet your algorithmic problem-solving needs!
