@@ -17,14 +17,14 @@ export function FormSignin({ googleicon }: { googleicon: string }): ReactNode {
   }
 
   return (
-    <div className="">
+    <div>
       <button
         type="button"
-        className="w-full h-11 rounded-md border border-neutral-950 bg-neutral-900 hover:bg-neutral-950 text-neutral-200 font-semibold mb-5 flex items-center justify-center"
+        className="w-full h-11 rounded-md bg-neutral-900 hover:bg-neutral-950 text-neutral-200 font-semibold mb-5 flex items-center justify-center"
         onClick={handleSignin}
       >
         <Image src={googleicon} width={20} height={20} alt="goole-icon" />
-        <div className="pl-2">Sign in with google</div>
+        <div className="pl-2">Continue with google</div>
       </button>
       {myerror ? (
         <div className="flex items-center">
