@@ -5,8 +5,6 @@ import { TransparentBackground } from "ui";
 import { TrpcProvider } from "./_trpc/trpc-provider";
 import { RecoilContextProvider } from "./recoil-context-provider";
 
-export const revalidate = 0;
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

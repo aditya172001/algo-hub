@@ -2,6 +2,8 @@ import { type ReactElement } from "react";
 import { serverTrpc } from "server/src/utils/server-client";
 import { FilterSection, FilteredQuestionList, Profile } from "ui";
 
+export const revalidate = 0;
+
 export default async function Problems(): Promise<ReactElement> {
   const questions = await serverTrpc.user.getAllQuestions();
   if (questions.status === "error") {
