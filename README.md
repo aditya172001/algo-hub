@@ -26,8 +26,4 @@ Algo Hub is a cutting-edge web application designed as a LeetCode clone, providi
 
 - TypeScript is the language of choice for problem-solving.
 
-## Getting Started
-
-Coming soon!
-
 Feel free to explore, contribute, and elevate the platform to meet your algorithmic problem-solving needs!
