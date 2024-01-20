@@ -36,4 +36,5 @@ yarn-error.log*
 .vercel
 
 # backend server
-dist/
+dist
+be-deployment.txt

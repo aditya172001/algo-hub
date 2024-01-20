@@ -3,8 +3,6 @@ import { type ReactElement } from "react";
 import { Problem, Profile } from "ui";
 import Link from "next/link";
 
-export const revalidate = 0;
-
 export default function SingleProblem({
   params,
 }: {
