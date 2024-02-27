@@ -13,11 +13,7 @@ export function SubmitSection(): ReactElement {
   const userCode = useRecoilValue(userCodeState);
 
   const submitResponse = trpc.user.submitSolution.useMutation();
-  const { data: session, status } = useSession();
-
-  useEffect(() => {
-    if (status === "unauthenticated") redirect("/api/auth/signin");
-  }, [status]);
+  const { data: session } = useSession();
   useEffect(() => {
     if (
       submitResponse.data?.status === "error" &&
@@ -27,13 +23,12 @@ export function SubmitSection(): ReactElement {
   }, [submitResponse.data]);
 
   function handleSubmit(): void {
-    if (session)
-      submitResponse.mutate({
-        quesNumber,
-        userCode,
-        //@ts-expect-error -- it exists but havent updated .d.ts
-        token: session.id_token as string,
-      });
+    submitResponse.mutate({
+      quesNumber,
+      userCode,
+      // @ts-expect-error -- it exists but havent updated .d.ts
+      token: (session?.id_token || "") as string,
+    });
   }
 
   return (
@@ -62,7 +57,7 @@ export function SubmitSection(): ReactElement {
         )}
       </div>
       <button
-        disabled={status === "loading"}
+        disabled={submitResponse.isLoading}
         type="button"
         className=" bg-[#41be6b] rounded-md px-4 py-1 font-semibold h-8"
         onClick={handleSubmit}

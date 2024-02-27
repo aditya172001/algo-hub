@@ -2,11 +2,25 @@ import Image from "next/image";
 import type { ReactElement } from "react";
 import { serverTrpc } from "server/src/utils/server-client";
 import { CircleUserRound } from "lucide-react";
+import { getUserSession } from "utils";
+import Link from "next/link";
 import { ProgressCircle } from "./progress-circle";
 import { SignOutButton } from "./signout-button";
 import { ProfileWrapper } from "./profile-wrapper";
 
 export async function Profile(): Promise<ReactElement> {
+  const session = await getUserSession();
+  if (!session) {
+    return (
+      <Link
+        href="/api/auth/signin"
+        className="px-2 py-1 hover:bg-neutral-800 rounded-md hover:text-orange-400"
+      >
+        Login
+      </Link>
+    );
+  }
+
   const response = await serverTrpc.user.getProfile();
   if (response.status === "error") {
     return <CircleUserRound className="h-5 w-5 mx-2 my-1" />;

@@ -16,7 +16,7 @@ export function TrpcProvider({
       links: [
         httpBatchLink({
           url: "https://api-algo-hub.adityastack.dev/api/trpc", //for production
-          // url: "http://localhost:4000/api/trpc", for development
+          // url: "http://localhost:4000/api/trpc", //for development
         }),
       ],
     })

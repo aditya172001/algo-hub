@@ -44,18 +44,20 @@ export const userRouter = router({
       userSolvedQuestions: data.userSolvedQuestions,
     };
   }),
+
   // get brief detail about all questions
   getAllQuestions: serverProcedure.query(async (opts) => {
     const { session, prisma } = opts.ctx;
-    const email = session.user?.email;
+    const email = session?.user?.email;
 
-    if (!email || !prisma)
+    if (!prisma)
       return { status: "error" as "error", message: "Internal Server Error" };
 
     let allQuestions;
     try {
-      const user = await prisma.user.findUnique({ where: { email } });
-      if (!user) throw new Error("user not found");
+      let user = null;
+      if (email) user = await prisma.user.findUnique({ where: { email } });
+      if (!user) user = { id: "" };
       allQuestions = await prisma.question.findMany({
         include: {
           users: {
@@ -82,6 +84,7 @@ export const userRouter = router({
     });
     return { status: "success" as "success", filteredQuestions };
   }),
+
   // get complete detail of a single quesiton
   getQuestion: serverProcedure
     .input(z.object({ quesNumber: z.number() }))
@@ -104,6 +107,7 @@ export const userRouter = router({
 
       return filteredQues;
     }),
+
   // submit user code to be tested
   submitSolution: publicProcedure
     .input(
@@ -126,12 +130,15 @@ export const userRouter = router({
       })
     )
     .mutation(async (opts) => {
-      //check if user is authenticated using jwt token
-      const token = jwt.decode(opts.input.token) as TokenType;
-      const currentTime = Date.now();
-      if (!(token.iat * 1000 < currentTime && currentTime < token.exp * 1000)) {
-        return { status: "error", message: "Unauthorized" };
+      let token;
+      // if user is sending invalid jwt token
+      if (opts.input.token !== "") {
+        token = jwt.decode(opts.input.token) as TokenType;
+        const currentTime = Date.now();
+        if (!(token.iat * 1000 < currentTime && currentTime < token.exp * 1000))
+          return { status: "error", message: "Unauthorized" };
       }
+      if (!token) token = { email: "" };
 
       //if user is valid then fetch associated data from db
       const { email } = token;
@@ -171,9 +178,6 @@ export const userRouter = router({
               status: "Solved",
               prisma,
             });
-            if (!isSaved) {
-              return { status: "error", message: "Internal Server Error" };
-            }
           }
           return { status: "success", message: "AC" };
         } else {
@@ -185,9 +189,6 @@ export const userRouter = router({
               status: "Attempted",
               prisma,
             });
-            if (!isSaved) {
-              return { status: "error", message: "Internal Server Error" };
-            }
           }
           return { status: "error", message: "WA" };
         }
@@ -201,9 +202,6 @@ export const userRouter = router({
             status: "Attempted",
             prisma,
           });
-          if (!isSaved) {
-            return { status: "error", message: "Internal Server Error" };
-          }
         }
         return { status: "error", message: "TLE" };
       }

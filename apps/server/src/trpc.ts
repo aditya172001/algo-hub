@@ -16,7 +16,7 @@ export const publicProcedure = t.procedure;
 
 const isAuthed = middleware(async (opts) => {
   const session = await getUserSession();
-  if (!session) throw new TRPCError({ code: "UNAUTHORIZED" });
+  // if (!session) throw new TRPCError({ code: "UNAUTHORIZED" });
   return opts.next({
     ctx: {
       ...opts.ctx,

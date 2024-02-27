@@ -22,7 +22,7 @@ export async function getUserId_QuestionId_CurrentQuestionStatus({
         quesNumber,
       },
     });
-    if (!user || !question) {
+    if (!question) {
       return {
         dbFetchError: true,
         userId: "",
@@ -33,13 +33,13 @@ export async function getUserId_QuestionId_CurrentQuestionStatus({
 
     const userQuestionRealtion = await prisma.userQuestionStatus.findUnique({
       where: {
-        userId_questionId: { userId: user.id, questionId: question.id },
+        userId_questionId: { userId: user?.id || "", questionId: question.id },
       },
     });
     const currentQuestionStatus = userQuestionRealtion?.status || "ToDo";
     return {
       dbFetchError: false,
-      userId: user.id,
+      userId: user?.id || "",
       questionId: question.id,
       currentQuestionStatus,
     };
