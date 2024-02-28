@@ -38,7 +38,7 @@ export async function Problem({
         followUp={followUp}
         hints={hints}
       />
-      <div className="">
+      <div>
         <CodeEditor data={JSON.stringify(starterCode)} />
         <SubmitSection />
       </div>

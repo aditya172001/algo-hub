@@ -29,7 +29,7 @@ export async function ProblemDescription({
   followUp: string | undefined;
   hints: string[] | undefined;
 }): Promise<ReactElement> {
-  let status: $Enums.StatusType = "ToDo";
+  let status: $Enums.StatusType;
   try {
     const session = await getUserSession();
     const user = await prisma.user.findUnique({
@@ -38,9 +38,8 @@ export async function ProblemDescription({
 
     const question = await prisma.question.findUnique({
       where: { quesNumber },
-      include: { users: { where: { userId: user?.id } } },
+      include: { users: { where: { userId: user?.id || "" } } },
     });
-    // console.log(question);
 
     status = question?.users[0]?.status || "ToDo";
   } catch (error) {
