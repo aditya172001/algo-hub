@@ -131,13 +131,15 @@ export const userRouter = router({
     )
     .mutation(async (opts) => {
       let token;
-      // if user is sending invalid jwt token
-      if (opts.input.token !== "") {
-        token = jwt.decode(opts.input.token) as TokenType;
-        const currentTime = Date.now();
-        if (!(token.iat * 1000 < currentTime && currentTime < token.exp * 1000))
-          return { status: "error", message: "Unauthorized" };
-      }
+      token = jwt.decode(opts.input.token) as TokenType;
+      const currentTime = Date.now();
+      if (
+        token &&
+        token.iat &&
+        token.exp &&
+        !(token.iat * 1000 < currentTime && currentTime < token.exp * 1000)
+      )
+        return { status: "error", message: "Unauthorized" };
       if (!token) token = { email: "" };
 
       //if user is valid then fetch associated data from db

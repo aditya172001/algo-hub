@@ -29,20 +29,24 @@ export async function ProblemDescription({
   followUp: string | undefined;
   hints: string[] | undefined;
 }): Promise<ReactElement> {
-  let status: $Enums.StatusType;
+  let status: $Enums.StatusType = "ToDo";
   try {
     const session = await getUserSession();
     const user = await prisma.user.findUnique({
       where: { email: session?.user?.email || "" },
     });
+
     const question = await prisma.question.findUnique({
       where: { quesNumber },
       include: { users: { where: { userId: user?.id } } },
     });
+    // console.log(question);
+
     status = question?.users[0]?.status || "ToDo";
   } catch (error) {
     status = "ToDo";
   }
+
   return (
     <div className="bg-[#1e1e1e] rounded-md border border-neutral-600">
       <div className="bg-neutral-800 rounded-t-md flex space-x-1 py-1 px-3">
