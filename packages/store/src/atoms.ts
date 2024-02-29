@@ -22,3 +22,8 @@ export const isStatusOpenState = atom({
   key: "isStatusOpenState",
   default: false,
 });
+
+export const isProgressBarVisibleState = atom<boolean>({
+  key: "isProgressBarVisibleState",
+  default: false,
+});

@@ -5,15 +5,21 @@ import Image from "next/image";
 import { signIn } from "next-auth/react";
 import { Ban, User2Icon } from "lucide-react";
 import Link from "next/link";
+import { isProgressBarVisibleState } from "store";
+import { useSetRecoilState } from "recoil";
 
 export function FormSignin({ googleicon }: { googleicon: string }): ReactNode {
   const [myerror, setMyerror] = useState<string | null>(null);
+  const setIsProgressBarVisible = useSetRecoilState(isProgressBarVisibleState);
 
   async function handleSignin(): Promise<void> {
+    setIsProgressBarVisible(true);
     try {
       await signIn("google", { callbackUrl: "/problems" });
     } catch (error) {
       setMyerror("Internal Server Error, Try Again");
+    } finally {
+      setIsProgressBarVisible(false);
     }
   }
 
