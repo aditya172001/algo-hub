@@ -23,7 +23,7 @@ export function ProgressBar(): ReactElement {
     <>
       {isProgressBarVisible ? (
         <div
-          className={`h-1 bg-orange-600 ease-in-out transition-all `}
+          className={`h-1 bg-white ease-in-out transition-all `}
           style={{
             width: `${progress}%`,
             transition: "width 0.5s ease-in-out",
